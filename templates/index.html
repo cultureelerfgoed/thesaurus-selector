@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thesauri Keuzehulp</title>
+</head>
+<body>
+    <h1>Thesauri Keuzehulp: controleer in welke thesauri welke typen termen voorkomen</h1>
+    
+    <form method="post">
+        {% for category in categories %}
+            <input type="checkbox" name="categories" value="{{ category }}" {% if category in selected_categories %}checked{% endif %}>
+            {{ category }}<br>
+        {% endfor %}
+        
+        <br>
+        
+        <button type="submit">Filter thesauri op type termen</button>
+    </form>
+
+    {% if selected_categories %}
+        <h2>Geselecteerde categorieën:</h2>
+        <ul>
+            {% for category in selected_categories %}
+                <li>{{ category }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Thesauri die <u>alle</u> geselecteerde categorieën bevatten:</h2>
+        <ul>
+            {% for thesaurus in filtered_thesauri %}
+                <li>{{ thesaurus }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
